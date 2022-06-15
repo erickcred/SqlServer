@@ -8,7 +8,7 @@ namespace ADO
     {
         public static void Main(string[] args)
         {
-            const string connectionString = @"Data Source=localhost\SQLEXPRESS;Database=erickcred;TrustServerCertificate=true;User Id=sa;Password=123;";
+            const string connectionString = @"Data Source=localhost\SQLEXPRESS;Database=erickcred;TrustServerCertificate=true;User ID=sa;Password=123;";
 
             using(SqlConnection connection = new SqlConnection(connectionString))
             {
