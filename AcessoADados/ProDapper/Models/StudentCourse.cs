@@ -9,5 +9,8 @@ namespace ProDapper.Models
         public DateTime StartDate { get; set; }
         public DateTime LastUpdateDate { get; set; }
 
+        public Course Course { get; set; }
+        public Student Student { get; set; }
+        
     }
 }

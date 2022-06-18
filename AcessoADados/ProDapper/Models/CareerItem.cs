@@ -8,5 +8,8 @@ namespace ProDapper.Models
         public string Description { get; set; }
         public int Order { get; set; }
         
+        public Course Course { get; set; }
+        public Career Career { get; set; }
+
     }
 }
