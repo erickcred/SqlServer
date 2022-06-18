@@ -122,7 +122,7 @@ GROUP BY
     [Curso].[CategoriaId], [Categoria].[Nome]
 HAVING
     COUNT([Curso].[CategoriaId]) > 1
-
+GO
 
 -- Crinado Views
 CREATE OR ALTER VIEW VWCursosPorCategoria AS 
