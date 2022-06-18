@@ -30,7 +30,12 @@ namespace ProDapper
                 // ProcessConnections.ExecuteDeletedStudentProcedure(connection);
 
                 // ProcessConnections.OneToOne(connection);
-                ProcessConnections.OneToMany(connection);
+                // ProcessConnections.OneToMany(connection);
+                // ProcessConnections.QueryMutiple(connection);
+                // ProcessConnections.SelectIn(connection);
+                // ProcessConnections.Like(connection);
+                ProcessConnections.Transactions(connection);
+                ProcessConnections.ListCategories(connection);
 
 
 

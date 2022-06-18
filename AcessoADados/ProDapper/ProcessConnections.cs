@@ -293,5 +293,117 @@ namespace ProDapper
                 }
             }
         }
+    
+        public static void QueryMutiple(SqlConnection connection) // ManyToMay
+        {
+            string sql = @"
+                SELECT * FROM [Category];
+                SELECT * FROM [Course]";
+
+            using (var multi = connection.QueryMultiple(sql))
+            {
+                var categories = multi.Read<Category>();
+                var courses = multi.Read<Course>();
+
+                foreach (var category in categories)
+                {
+                    Console.WriteLine($"{category.Title}");
+                    foreach (var course in courses)
+                    {
+                        Console.WriteLine($" - {course.Title}");
+                    }
+                }
+            }
+        }
+    
+        public static void SelectIn(SqlConnection connection)
+        {
+            string sql = @"
+                SELECT
+                    *
+                FROM
+                    [Career] 
+                WHERE [Id] IN @Id";
+
+            var items = connection.Query<Career>(sql, new {
+                Id = new[] {
+                    "01ae8a85-b4e8-4194-a0f1-1c6190af54cb",
+                    "4327ac7e-963b-4893-9f31-9a3b28a4e72b"
+                }
+            });
+            foreach (var item in items)
+            {
+                Console.WriteLine($"{item.Id} - {item.Title}");
+                foreach (var careerItem in item.CareerItems)
+                {
+                    Console.WriteLine($"\nTitulo Carretira: {careerItem.Title}");
+                }
+            }
+        }
+    
+        public static void Like(SqlConnection connection)
+        {
+            string term = "api";
+            string query = @"
+                SELECT
+                    *
+                FROM 
+                    [Course]
+                WHERE
+                    [Title]
+                    LIKE @exp";
+
+            var item = connection.Query<Course>(query, new 
+            {
+                exp = $"%{term}%"
+            });
+
+            foreach (var course in item)
+            {
+                Console.WriteLine($"{course.Title}");
+            }
+        }
+    
+        public static void Transactions(SqlConnection connection)
+        {
+            Category category = new Category();
+            category.Id = Guid.NewGuid();
+            category.Title = "HTML 5";
+            category.Url = "html5";
+            category.Summary = "HTML 5 Passo a Passo";
+            category.Order = 0;
+            category.Description = "Primeiros passos com HMTL5";
+            category.Featured = false;
+
+            string query = @"
+                INSERT INTO 
+                    [Category]
+                VALUES (
+                    @Id,
+                    @Title,
+                    @Url,
+                    @Summary,
+                    @Order,
+                    @Description,
+                    @Featured
+                )";
+            connection.Open();
+            using (var transaction = connection.BeginTransaction())
+            {
+                var rows = connection.Execute(query, new 
+                {
+                    category.Id,
+                    category.Title,
+                    category.Url,
+                    category.Summary,
+                    category.Order,
+                    category.Description,
+                    category.Featured
+                }, transaction);
+                // transaction.Commit();
+                transaction.Rollback();
+                Console.WriteLine($"{rows} linhas afetadas.");
+            }
+        }
     }
 }
