@@ -11,6 +11,6 @@ namespace ProDapper.Models
         public string Bio { get; set; }
         public string Url { get; set; }
         public string Email { get; set; }
-        public bool Type { get; set; }
+        public int Type { get; set; }
     }
 }
