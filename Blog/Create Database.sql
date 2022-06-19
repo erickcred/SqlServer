@@ -25,7 +25,8 @@ INSERT INTO
     [User]
 VALUES
     -- ('Erick Rick', 'erickcred@email.com', 'Password', 'Dessenvolvedor (JavaScript, NodeJs, .NET)', 'https://caminho_da_imagem', 'erickcred');
-    ('Jessica', 'hessicad@email.com', 'Password', 'Cordenadora de Desenvolvimento', 'https://caminho_da_imagem', 'jessica');
+    ('Jessica', 'hessicad@email.com', 'Password', 'Cordenadora de Desenvolvimento', 'https://caminho_da_imagem', 'jessica'),
+    ('Marta Rocha', 'marta@email.com', 'Password', 'Cordenadora de Vendas', 'https://caminho_da_imagem', 'marta');
 GO
 
 CREATE TABLE [Role] (

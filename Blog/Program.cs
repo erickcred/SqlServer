@@ -13,90 +13,52 @@ namespace Blog
         public static void Main(string[] args)
         {
             var connection = new SqlConnection(CONNECTION_STRING);
+            Console.Clear();
             connection.Open();
 
-            // ReadUsers();
-            // ReadUser();
-            // CreateUser();
-            // UpdateUser();
-            // DeleteUser();
+            ReadUsers(connection);
+            Console.WriteLine();
+            // ReadRoles(connection);
+            // DeleteUser(connection);
+            UpdateUser(connection);
             ReadUsers(connection);
             connection.Close();
         }
 
         public static void ReadUsers(SqlConnection connection)
         {
-            var userRepository = new UserRepository(connection).GetAll();
-            foreach(var user in userRepository)
+            var repository = new UserRepository(connection);
+            var users = repository.GetAll();
+            
+            foreach (var user in users)
                 Console.WriteLine(user);
         }
+
+        public static void UpdateUser(SqlConnection connection)
+        {
+            var user = connection.Get<User>(9);
+            user.Email = "jessicad@email.com";
+
+            var respository = new UserRepository(connection);
+            respository.Update(user);
+        }
+
+        public static void DeleteUser(SqlConnection connection)
+        {
+            var repository = new UserRepository(connection);
+            repository.Delete(10);
+        }
         
-        // public static void ReadUser()
-        // {
-        //     Console.Clear();
+        public static void ReadRoles(SqlConnection connection)
+        {
+            var repository = new RoleRepository(connection);
+            var roles = repository.GetAll();
 
-        //     using (SqlConnection connection = new SqlConnection(CONNECTION_STRING))
-        //     {
-        //         var user = connection.Get<User>(1);
-        //         Console.WriteLine(user);
-        //     }
-        // }
-
-        // public static void CreateUser()
-        // {
-        //     User user = new User() {
-        //         Name = "Jão Silva",
-        //         Email = "jao@email.com",
-        //         Bio = "EStudante de Programação",
-        //         Image = "https://caminho_da_imagem",
-        //         Slug = "jao",
-        //         PasswordHash = "asdf"
-
-        //     };
-        //     using (var connection = new SqlConnection(CONNECTION_STRING))
-        //     {
-        //         connection.Insert<User>(user);
-        //         Console.WriteLine($"Cadastro realizado com sucesso!");
-        //     }
-        // }
-
-        // public static void UpdateUser()
-        // {
-        //     User user = new User() {
-        //         Id = 4,
-        //         Name = "Jão da Silva",
-        //         Email = "jao@email.com",
-        //         Bio = "Estudante de Programação",
-        //         Image = "https://caminho_da_imagem",
-        //         Slug = "jao",
-        //         PasswordHash = "asf"
-
-        //     };
-        //     using (var connection = new SqlConnection(CONNECTION_STRING))
-        //     {
-        //         connection.Update<User>(new User() {
-        //             Id = 4,
-        //             Name = "Jão da Silva",
-        //             Email = "jao@email.com",
-        //             Bio = "Estudante de Programação",
-        //             Image = "https://caminho_da_imagem",
-        //             Slug = "jao",
-        //             PasswordHash = "asf"
-
-        //         });
-        //         Console.WriteLine("Cadatro atualizado com sucesso!");
-        //     }
-        // }
-
-        // public static void DeleteUser()
-        // {
-        //     using (SqlConnection connection = new SqlConnection(CONNECTION_STRING))
-        //     {
-        //         var user = connection.Get<User>(2);
-        //         connection.Delete<User>(user);
-        //         Console.WriteLine("Usuário deletado com sucesso!");
-        //     }
-        // }
+            foreach (Role role in roles)
+            {
+                Console.WriteLine(role);
+            }
+        }
 
     }
 }
