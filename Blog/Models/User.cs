@@ -16,8 +16,7 @@ namespace Blog.Models
 
         public override string ToString()
         {
-            string user = "Users";
-            return $"{user} \n{Id} - {Name} \n - Email: {Email} - Bio: {Bio} - Image: {Image} - Slug: {Slug}";
+            return $"{Id} - {Name} \n - Email: {Email} - Bio: {Bio} - Image: {Image} - Slug: {Slug}";
         }
     }
 }

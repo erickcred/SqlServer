@@ -16,49 +16,102 @@ namespace Blog
             Console.Clear();
             connection.Open();
 
+            Console.WriteLine("Users");
             ReadUsers(connection);
-            Console.WriteLine();
-            // ReadRoles(connection);
-            // DeleteUser(connection);
-            UpdateUser(connection);
-            ReadUsers(connection);
+
+            Console.WriteLine("\nRoles");
+            ReadRoles(connection);
+
+            Console.WriteLine("\nTags");
+            ReadTags(connection);
+
+            Console.WriteLine("\nCategories");
+            ReadCategories(connection);
+
+            
             connection.Close();
         }
 
         public static void ReadUsers(SqlConnection connection)
         {
-            var repository = new UserRepository(connection);
-            var users = repository.GetAll();
-            
-            foreach (var user in users)
-                Console.WriteLine(user);
+            var repository = new Repository<User>(connection);
+            var users = repository.Get();
+            ReadItems(users);
+        }
+
+        public static void ReadUser(SqlConnection connection)
+        {
+            var repository = new Repository<User>(connection);
+            Console.WriteLine(repository.GetById(1));
         }
 
         public static void UpdateUser(SqlConnection connection)
         {
             var user = connection.Get<User>(9);
-            user.Email = "jessicad@email.com";
+            user.Email = "jessica@email.com.br";
 
-            var respository = new UserRepository(connection);
+            var respository = new Repository<User>(connection);
             respository.Update(user);
+        }
+
+        public static void DeleteUserId(SqlConnection connection)
+        {
+            var repository = new Repository<User>(connection);
+            repository.Delete(1);
         }
 
         public static void DeleteUser(SqlConnection connection)
         {
-            var repository = new UserRepository(connection);
-            repository.Delete(10);
+            var repository = new Repository<User>(connection);
+            var user = repository.GetById(9);
+            repository.Delete(user);
+        }
+
+        public static void CreateUser(SqlConnection connection)
+        {
+            var respository = new Repository<User>(connection);
+            var user = respository.Create(new User() {
+                Name = "Alfred Mord",
+                Email = "alfbt@email.com",
+                PasswordHash = "4321",
+                Bio = "Mordomo",
+                Image = "https://...",
+                Slug = "alf"
+            });
+            Console.WriteLine($"Usuário ({user.Id} - {user.Name}) adicionado com sucesso!");
         }
         
         public static void ReadRoles(SqlConnection connection)
         {
-            var repository = new RoleRepository(connection);
-            var roles = repository.GetAll();
+            var repository = new Repository<Role>(connection);
+            var roles = repository.Get();
 
-            foreach (Role role in roles)
+            foreach (var item in roles)
             {
-                Console.WriteLine(role);
+                Console.WriteLine(item);
             }
         }
 
+        public static void ReadTags(SqlConnection connection)
+        {
+            var repository = new Repository<Tag>(connection);
+            ReadItems(repository.Get());
+        }
+
+        public static void ReadCategories(SqlConnection connection)
+        {
+            var repository = new Repository<Category>(connection);
+            ReadItems(repository.Get());
+        }
+
+        private static void ReadItems(IEnumerable<Object> obj)
+        {
+            foreach (var item in obj)
+            {
+                Console.WriteLine(item);
+            }
+        }
+    
+    
     }
 }

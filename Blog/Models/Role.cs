@@ -11,8 +11,7 @@ namespace Blog.Models
 
         public override string ToString()
         {
-            string role = "Role";
-            return $"{role} \n{Id} - {Name} - {Slug}";
+            return $"{Id} - {Name} - {Slug}";
         }
     }
 }
