@@ -21,8 +21,7 @@ CREATE NONCLUSTERED INDEX [IX_User_Email] ON [User]([Email])
 CREATE NONCLUSTERED INDEX [IX_User_Slug] ON [User]([Slug])
 GO
 
-INSERT INTO
-    [User]
+INSERT INTO [User]
 VALUES
     ('Erick Rick', 'erickcred@email.com', 'Password', 'Dessenvolvedor (JavaScript, NodeJs, .NET)', 'https://caminho_da_imagem', 'erickcred'),
     ('Jessica', 'hessicad@email.com', 'Password', 'Cordenadora de Desenvolvimento', 'https://caminho_da_imagem', 'jessica'),
@@ -38,6 +37,11 @@ CREATE TABLE [Role] (
     CONSTRAINT [UQ_Role_Slug] UNIQUE([Slug])
 );
 CREATE NONCLUSTERED INDEX [IX_Role_Slug] ON [Role]([Slug])
+GO
+
+INSERT INTO [Role]
+VALUES
+    ('Author', 'author')
 GO
 
 CREATE TABLE [UserRole] (
@@ -57,6 +61,11 @@ CREATE TABLE [Category] (
     CONSTRAINT [UK_Category_Slug] UNIQUE([Slug])
 );
 CREATE NONCLUSTERED INDEX [IX_Category_Slug] ON [Category]([Slug])
+GO
+
+INSERT INTO [Category]
+VALUES
+('ASP.NET', 'aspnet')
 GO
 
 
@@ -88,6 +97,11 @@ CREATE TABLE [Tag] (
     CONSTRAINT [UK_Tag_Slug] UNIQUE([Slug])
 );
 CREATE NONCLUSTERED INDEX [IX_Tag_Slug] ON [Tag]([Slug])
+GO
+
+INSERT INTO [Tag]
+VALUES
+('ASP.NET','aspnet')
 GO
 
 CREATE TABLE [PostTag] (
