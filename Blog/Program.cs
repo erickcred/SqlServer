@@ -2,8 +2,8 @@
 using Dapper.Contrib.Extensions;
 using Microsoft.Data.SqlClient;
 using Blog.Repositories;
-using Blog.Views;
-using Blog.Views.Menus;
+// using Blog.Views;
+// using Blog.Views.Menus;
 using Blog.Screens.UserScreen;
 using Blog.Screens.RoleScreen;
 using Blog.Screens.CategoryScreen;
