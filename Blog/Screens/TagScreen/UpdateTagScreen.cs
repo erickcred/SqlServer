@@ -10,6 +10,7 @@ namespace Blog.Screens.TagScreen
         public static void Load()
         {
             Console.Clear();
+            Console.WriteLine("Atualizando Tag");
             Update();
         }
 

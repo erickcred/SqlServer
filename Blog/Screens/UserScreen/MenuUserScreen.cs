@@ -30,13 +30,13 @@ namespace Blog.Screens.UserScreen
                         ListUserScreen.Load();
                         break;
                     case 2:
-                        // CreateTagScreen.Load();
+                        CreateUserScreen.Load();
                         break;
                     case 3:
-                        // UpdateTagScreen.Load();
+                        UpdateUserScreen.Load();
                         break;
                     case 4:
-                        // DeleteTagScreen.Load();
+                        DeleteUserScreen.Load();
                         break;
                     case 0:
                     default:
